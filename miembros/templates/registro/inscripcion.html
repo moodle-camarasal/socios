@@ -1,0 +1,52 @@
+{% extends "master.html" %}
+{% load static %}
+{% block title %}
+  Inscripción | CFEVirtual
+{% endblock %}
+
+{% block content %}
+
+<div id="cfe-rs-windon" class="cfe-mimodal">
+	<div class="cfe-fondo"></div>
+	<div class="cfe-marco">
+		<div class="cfe-marco-blanco">
+			<img src="{% static 'logo.png' %}" alt="My image">
+			<h2>Inscripción al curso</h2>
+			<form id="cfe-form-rs" action="addrecord/" method="post" novalidate>
+			{% csrf_token %}
+				<div>
+				<input type="email" id="cfe-ce-rs" name="cfe-mail" placeholder="Correo Electronico" required />
+				</div>
+				<input type="hidden" id="cfe-fe-rs" name="cfe-curso" value="{{mycurso}}" />
+				<span id="cfe-avisos" class="">Cuadro de avisos</span>
+				<div>
+				<button type="submit" value="Submit">Enviar</button>
+				</div>
+			</form>
+		</div>
+		<button id="cfe-close-rs" class="cfe-cerrar">x</button>
+	</div>
+</div>  
+<!--  AQUI EMPIEZA EL SCRIPT PARA ALGUNAS VALIDACIONES -->
+	<script>
+		const avisos = document.getElementById('cfe-avisos');
+		let visible = {{ esvisible }};
+		let textoDelmensaje = "{{ textoMensaje }}";
+		
+		document.body.onclick = function() {
+			avisos.classList.add("cfe-toogle")
+			};
+		document.body.onload = function() {
+			mytoogle();
+		}
+		function mytoogle(){
+			if(visible){
+				avisos.classList.remove("cfe-toogle")
+				avisos.innerText = textoDelmensaje
+			}else{
+				avisos.classList.add("cfe-toogle")
+				avisos.innerText = " "
+			}  
+		}
+	</script>	
+{% endblock %}

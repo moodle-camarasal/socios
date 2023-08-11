@@ -1,0 +1,20 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Details about {{ mymember.firstname }} {{ mymember.lastname }}
+{% endblock %}
+
+
+{% block content %}
+{% include "myencabezado.html" with me="TOBIAS" sponsor="W3SCHOOLS" %}
+<h1>{{ mymember.firstname }} {{ mymember.lastname }}</h1>
+  
+<p>Cargo: {{ mymember.cargo }}</p>
+<p>Correo: {{ mymember.correoelectronico }}</p>
+<p>Telefono: {{ mymember.phone }}</p>
+<p>Codigo de Socio: {{ mymember.codigo_socio }}</p>
+<p>Registrado desde: {{ mymember.joined_date }}</p>
+
+<p>Regresar a <a href="/miembros">Miembros</a></p>
+{% include 'footer.html' %} 
+{% endblock %}

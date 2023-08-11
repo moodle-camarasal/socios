@@ -1,0 +1,68 @@
+{% extends "master.html" %}
+{% load static %}
+{% block title %}
+  Centro de Formación Virtual Empresarial
+{% endblock %}
+
+{% block content %}
+{% include "myencabezado.html" with me="TOBIAS" sponsor="W3SCHOOLS" %}
+
+  <h1>Camara de Comercio e Industria de El Salvador</h1>
+
+  <h3>Miembros</h3>
+	<div id="cfe-rs-windon" class="cfe-mimodal">
+		<div class="cfe-fondo"></div>
+		<div class="cfe-marco">
+			<div class="cfe-marco-blanco">
+				<img src="{% static 'logo.png' %}" alt="My image">
+				<h2>Registro de socio</h2>
+				<form id="cfe-form-rs" action="../addrecord/" method="post" >
+				{% csrf_token %}
+					<div>
+					<input type="text" id="cfe-ne-rs" name="cfe-empresa" placeholder="Nombre de la empresa" required />
+					</div>
+					<div>
+					<input type="text" id="cfe-nr-rs" name="cfe-nombre" placeholder="Nombre del Responsable" required />
+					</div>
+					<div>
+					<input type="text" id="cfe-cd-rs" name="cfe-cargo" placeholder="Cargo que desempeña" required />
+					</div>
+					<div>
+					<input type="email" id="cfe-ce-rs" name="cfe-mail" placeholder="Correo Electronico" required />
+					</div>
+					<div>
+					<input type="tel" id="cfe-te-rs" name="cfe-tel" placeholder="Telefono" required />
+					</div>
+					<div title="Requiere el formato 00099999" tooltip-dir="top" >
+					<input type="text" id="cfe-cs-rs" name="cfe-codigo" placeholder="Numero de Socioi CAMARASAL, 00099999" maxlength="8" required pattern="[0-9]{8}" />
+					<input type="hidden" id="cfe-fe-rs" name="cfe-fecha" value="{{myfecha}}" />
+					<span id="cfe-avisos" class="">Cuadro de avisos</span>
+					</div>
+					<div>
+					<button type="submit" value="Submit">Enviar</button>
+					</div>
+				</form>
+			</div>
+			<button id="cfe-close-rs" class="cfe-cerrar">x</button>
+		</div>
+	</div>
+{% include 'footer.html' %} 
+	<script>
+		const avisos = document.getElementById('cfe-avisos');
+		let visible = {{ esvisible }};
+		document.body.onclick = function() {
+			avisos.classList.add("cfe-toogle")
+			};
+		document.body.onload = function() {
+			mytoogle();
+		}
+		function mytoogle(){
+			if(visible){
+				avisos.classList.remove("cfe-toogle")
+			}else{
+				avisos.classList.add("cfe-toogle")
+			}  
+		}
+	</script>	
+
+{% endblock %}

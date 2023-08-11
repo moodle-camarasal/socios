@@ -1,0 +1,37 @@
+{% extends "master.html" %}
+{% load static %}
+{% block title %}
+  Centro de Formación Virtual Empresarial
+{% endblock %}
+
+{% block content %}
+<h1>Camara de Comercio e Industria de El Salvador</h1>
+<div class="#">
+	<h3>Registro de nuevos socios</h3>
+	<form action="guardarsocio/" method="post">
+	{% csrf_token %}
+		<div>
+		<input type="text" name="cfe-filial" placeholder="Filial" />
+		</div>
+		<div>
+		<input type="text" name="cfe-codigo" placeholder="Codigo del socio" />
+		</div>
+		<div>
+		<input type="text" name="cfe-razon-social" placeholder="Razon Social" />
+		</div>
+		<div>
+		<input type="text" name="cfe-persona-natural" placeholder="Persona Natural" />
+		</div>
+		<div>
+		<input type="text" name="cfe-usuario" placeholder="Usuario" />
+		</div>
+		<div>
+		<input type="text" name="cfe-password" placeholder="Contraseña" />
+		</div>
+		<div>
+		<button type="submit" value="Submit">Guardar</button>
+		</div>
+	</form>
+</div>
+    
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% block title %}
+  CAMARASAL - Lista de todos los socios
+{% endblock %}
+
+{% block content %}
+{% include "myencabezado.html" with me="TOBIAS" sponsor="W3SCHOOLS" %}
+ <p><a href="/">HOME - la fecha es: {{myfecha}}</a></p>
+
+{% comment %}
+  <h1>Welcome ladies and gentlemen</h1>
+{% endcomment %}
+
+<h1>Miembros</h1>
+  
+<ul>
+  {% for x in mymembers %}
+    <li><a href="details/{{ x.id }}">{{ x.firstname }} {{ x.lastname }}</a></li>
+  {% endfor %}
+</ul>
+{% include 'footer.html' %} 
+{% endblock %}

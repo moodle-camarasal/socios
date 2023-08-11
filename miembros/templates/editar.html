@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Editor para el socio {{ mysocios.razon_social }}
+{% endblock %}
+
+
+{% block content %}
+{% include "myencabezado.html" with me="TOBIAS" sponsor="W3SCHOOLS" %}
+
+<h1>{{ mysocios.razon_social }} | {{ mysocios.filiar }}</h1>
+  
+<p>Filial: {{ mysocios.filial }}</p>
+<p>Codigo: {{ mysocios.codigo_camarasal }}</p>
+<p>Razon Social: {{ mysocios.razon_social }}</p>
+<p>Persona Natural: {{ mysocios.persona_natural }}</p>
+<p>Estado: {{ mysocios.estado }}</p>
+
+<p>Opciones de edicion en construccion XD </p>
+<p>Regresar a <a href="/miembros">Miembros</a></p>
+{% include 'footer.html' %} 
+{% endblock %}

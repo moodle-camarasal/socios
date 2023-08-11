@@ -1,0 +1,57 @@
+{% extends "master.html" %}
+{% load static %}
+{% block title %}
+  Identificación | CFEVirtual
+{% endblock %}
+
+{% block content %}
+
+<div id="cfe-rs-windon" class="cfe-mimodal">
+	<div class="cfe-fondo"></div>
+	<div class="cfe-marco">
+		<div class="cfe-marco-blanco">
+			<img src="{% static 'logo.png' %}" alt="My image">
+			<h2>Identifición como Socio</h2>
+			<p style="text-align: center;font-size:0.5rem;">Accede al descuento de {{name_curso}}</small>
+			<form id="cfe-form-rs" action="acceso/" method="post" novalidate>
+			{% csrf_token %}
+				<div>
+				<input type="email" id="cfe-ce-rs" name="cfe-mail" placeholder="Correo del Contacto" required />
+				</div>
+				<div title="Requiere el formato 00099999" tooltip-dir="top" >
+				<input type="text" id="cfe-cs-rs" name="cfe-codigo" placeholder="Codigo de Socio" maxlength="8" required pattern="[0-9]{8}" />
+				</div>
+				<input type="hidden" name="cfe-producto" value="{{url_producto}}" />
+				<input type="hidden" name="cfe-id" value="{{id_curso}}" />
+				<span id="cfe-avisos" class="">Cuadro de avisos</span>
+				<div>
+				<button type="submit" value="Submit">Enviar</button>
+				</div>
+			</form>
+		</div>
+		<button id="cfe-close-rs" class="cfe-cerrar"><a href="{{url_curso}}">x</a></button>
+	</div>
+</div>  
+<!--  AQUI EMPIEZA EL SCRIPT PARA ALGUNAS VALIDACIONES -->
+	<script>
+		const avisos = document.getElementById('cfe-avisos');
+		let visible = {{ esvisible }};
+		let textoDelmensaje = "{{ textoMensaje }}";
+		
+		document.body.onclick = function() {
+			avisos.classList.add("cfe-toogle")
+			};
+		document.body.onload = function() {
+			mytoogle();
+		}
+		function mytoogle(){
+			if(visible){
+				avisos.classList.remove("cfe-toogle")
+				avisos.innerText = textoDelmensaje
+			}else{
+				avisos.classList.add("cfe-toogle")
+				avisos.innerText = " "
+			}  
+		}
+	</script>	
+{% endblock %}

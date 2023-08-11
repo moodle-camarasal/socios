@@ -1,0 +1,44 @@
+{% extends "master.html" %}
+
+{% block title %}
+  CAMARASAL - Lista de todos los socios
+{% endblock %}
+
+{% block content %}
+{% include "myencabezado.html" with me="TOBIAS" sponsor="W3SCHOOLS" %}
+ <p><a href="/">Regresa al inicio</a></p>
+
+{% comment %}
+  <h1>Welcome ladies and gentlemen</h1>
+{% endcomment %}
+
+<h1>Listado de Socios de CAMARASAL</h1>
+
+<table align="center" style="border: 1px #cc0040 solid">
+	<thead>
+		<tr>
+			<th style="border: 1px #cc0040 solid">ID</th>
+			<th style="border: 1px #cc0040 solid">Codigo</th>
+			<th style="border: 1px #cc0040 solid">Correo</th>
+			<th style="border: 1px #cc0040 solid">Razon Social</th>
+			<th style="border: 1px #cc0040 solid">Esta registrado</th>
+			<th style="border: 1px #cc0040 solid">Usuario</th>
+			<th style="border: 1px #cc0040 solid">Contraseña</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for x in mysocios %}
+			<tr>
+				<td style="border: 1px #cc0040 solid"><a href="editar/{{ x.id }}">{{ x.id }}</a></td>
+				<td style="border: 1px #cc0040 solid">{{ x.codigo }}</td>
+				<td style="border: 1px #cc0040 solid">{{ x.email }}</td>
+				<td style="border: 1px #cc0040 solid">{{ x.empresa }}</td>
+				<td style="border: 1px #cc0040 solid">{{ x.registrado }}</td>
+				<td style="border: 1px #cc0040 solid">{{ x.usuario }}</td>
+				<td style="border: 1px #cc0040 solid">{{ x.password }}</td>
+			</tr>
+			{% endfor %}			
+	</tbody>
+</table> 
+{% include 'footer.html' %} 
+{% endblock %}

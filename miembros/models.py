@@ -79,3 +79,9 @@ class MisCursos(models.Model):
     numeral_curso = models.CharField(max_length=100,null=True)
     url_curso = models.CharField(max_length=100,null=True)
     url_producto = models.CharField(max_length=100,null=True)
+
+class MisCorreos(models.Model):
+    remitente = models.CharField(max_length=100,null=True)
+    asunto = models.CharField(max_length=100,null=True)
+    cuerpo = models.CharField(max_length=1000,null=True)
+    otros = models.CharField(max_length=1000,null=True)

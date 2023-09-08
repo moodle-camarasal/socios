@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+			.mailconteiner{
+			  width:90%;
+			  padding:30px;
+			}
+			.mailconteiner img{
+			  width:100%;
+			}
+			.mailbody{
+			  width:95%;
+			  padding:20px;
+			  background-color:#f0f0f0;
+			}
+			.mailbody b{
+			  color:#cc0040;
+			}
+    </style>
+</head>
+<body>
+	<div class="mailconteiner">
+	  <img src="https://cfevirtual.camarasal.com/imgmoodle/headermail.jpg" alt="cabezera">
+	  <div class="mailbody">
+		<p>Gracias por adquirir el curso </p>
+		<h2>{{ mycurso }}</h2>
+		<p>Se ha creado el usuario de acceso al curso. Los datos de ingreso son:</p>
+		<ul>
+		  <li>Ingreso: <a href="{{ myurlcurso }}" target=“_blank”>{{ mycurso }}</a></li>
+		  <li>Usuario: <b>{{ myusuario }}</b></li>
+		  <li>Contraseña: <b>{{ mypass }}</b></li>
+		</ul>
+		<p>Accede al <a href="https://cfevirtual.camarasal.com/course/view.php?id=110">área de socios</a> para aplicar a los cursos con descuento. </p>
+		<p>En caso de que no poder ingresar a la plataforma puede solicitar el soporte al correo <b>coordinacion.virtual@camarasal.com</b>, o al WhatsApp <b>7211-6759</b>
+	Atentamente,</p>
+	  </div>
+	  <img src="https://cfevirtual.camarasal.com/imgmoodle/footermail.jpg" alt="cabezera">
+	</div>
+</body>
+</html>

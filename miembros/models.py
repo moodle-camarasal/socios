@@ -5,13 +5,10 @@ from django.db import models
 class Member(models.Model):
   firstname = models.CharField(max_length=255)
   lastname = models.CharField(max_length=255)
-  cargo = models.CharField(max_length=255, null=True)
-  correoelectronico = models.EmailField()
-  phone = models.IntegerField(null=True)
-  codigo_socio = models.CharField(max_length=10,null=True)
-  joined_date = models.DateField(null=True)
-  def __str__(self):
-    return f"{self.firstname} {self.lastname}"
+  username = models.CharField(max_length=255)
+  email = models.EmailField()
+  password = models.CharField(max_length=10)
+  usado = models.CharField(max_length=2,null=True,default="no")
     
 class Socios(models.Model):
     filial = models.CharField(max_length=100)
@@ -85,3 +82,11 @@ class MisCorreos(models.Model):
     asunto = models.CharField(max_length=100,null=True)
     cuerpo = models.CharField(max_length=1000,null=True)
     otros = models.CharField(max_length=1000,null=True)
+
+class MisCuentas(models.Model):
+  firstname = models.CharField(max_length=255)
+  lastname = models.CharField(max_length=255)
+  username = models.CharField(max_length=255)
+  user_email = models.EmailField()
+  password = models.CharField(max_length=10)
+  usado = models.CharField(max_length=2,null=True,default="no")

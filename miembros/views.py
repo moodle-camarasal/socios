@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 # Create your views here.
+import csv
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt, requires_csrf_token
 from django.template import loader
@@ -56,22 +57,24 @@ def main(request):
   return HttpResponse(template.render(context, request))
 
 def testing(request):
-  #mydata = Member.objects.all()
-  #mycolumn = Member.objects.values_list('firstname')
-  #myrows = Member.objects.filter(firstname='A & D S.A. DE C.V.').values()
-  fecha_actual = datetime.now()
-  fecha_actual_str = fecha_actual.strftime("%Y-%m-%d")
-  aviso = "true"
-  template = loader.get_template('template.html')
-  context = {
-    #'fruits': ['Apple', 'Banana', 'Cherry'],
-    #'mymembers': mydata,
-    #'mysocios': mycolumn,
-    #'mydatos': myrows,
-    'esvisible': aviso,
-  }
-  return HttpResponse(template.render(context, request))
-  
+    datos = [
+        {"filial": "San Salvador", "codigo": "00001003", "empresa": "ACERO CENTRO AVILES, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
+        {"filial": "Santa Ana", "codigo": "00019023", "empresa": "ACEROS DE OCCIDENTE, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
+        {"filial": "Santa Ana", "codigo": "00002979", "empresa": "ACODES, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
+        {"filial": "Santa Ana", "codigo": "00003081", "empresa": "ACOMTUS, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
+        {"filial": "San Salvador", "codigo": "00015835", "empresa": "ACOSA, S.A DE C.V", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
+    ]
+
+    # Agrega los datos a la base de datos
+    for dato in datos:
+        MisDatos.objects.create(**dato)
+
+    # Obtén todos los registros
+    registros = MisDatos.objects.all()
+
+    # Renderiza un template con los registros
+    return render(request, 'template.html', {'registros': registros})
+    
 def addrecord(request):
     z = request.POST['cfe-empresa']
     u = request.POST['cfe-codigo']

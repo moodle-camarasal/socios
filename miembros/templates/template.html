@@ -7,46 +7,39 @@
 {% block content %}
 {% include "myencabezado.html" with me="TOBIAS" sponsor="W3SCHOOLS" %}
 
-  <h1>Camara de Comercio e Industria de El Salvador</h1>
+  <h1>Registros en MiModelo</h1>
+    <table>
+        <thead>
+            <tr>
+			<th>#</th>
+                <th>Filial</th>
+                <th>Código</th>
+                <th>Empresa</th>
+                <th>Nombre</th>
+				<th>Registrado</th>
+				<th>Socio</th>
+				<th>Trabaja</th>
+				<th>Correo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+                <tr>
+				<td>{{ registro.id }}</td>
+                    <td>{{ registro.filial }}</td>
+                    <td>{{ registro.codigo }}</td>
+                    <td>{{ registro.empresa }}</td>
+                    <td>{{ registro.nombre }}</td>
+							<td>{{ registro.registrado }}</td>
+							<td>{{ registro.socio }}</td>
+							<td>{{ registro.trabaja }}</td>
+							<td>{{ registro.email }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-  <h3>Miembros</h3>
-	<div id="cfe-rs-windon" class="cfe-mimodal">
-		<div class="cfe-fondo"></div>
-		<div class="cfe-marco">
-			<div class="cfe-marco-blanco">
-				<img src="{% static 'logo.png' %}" alt="My image">
-				<h2>Registro de socio</h2>
-				<form id="cfe-form-rs" action="../addrecord/" method="post" >
-				{% csrf_token %}
-					<div>
-					<input type="text" id="cfe-ne-rs" name="cfe-empresa" placeholder="Nombre de la empresa" required />
-					</div>
-					<div>
-					<input type="text" id="cfe-nr-rs" name="cfe-nombre" placeholder="Nombre del Responsable" required />
-					</div>
-					<div>
-					<input type="text" id="cfe-cd-rs" name="cfe-cargo" placeholder="Cargo que desempeña" required />
-					</div>
-					<div>
-					<input type="email" id="cfe-ce-rs" name="cfe-mail" placeholder="Correo Electronico" required />
-					</div>
-					<div>
-					<input type="tel" id="cfe-te-rs" name="cfe-tel" placeholder="Telefono" required />
-					</div>
-					<div title="Requiere el formato 00099999" tooltip-dir="top" >
-					<input type="text" id="cfe-cs-rs" name="cfe-codigo" placeholder="Numero de Socioi CAMARASAL, 00099999" maxlength="8" required pattern="[0-9]{8}" />
-					<input type="hidden" id="cfe-fe-rs" name="cfe-fecha" value="{{myfecha}}" />
-					<span id="cfe-avisos" class="">Cuadro de avisos</span>
-					</div>
-					<div>
-					<button type="submit" value="Submit">Enviar</button>
-					</div>
-				</form>
-			</div>
-			<button id="cfe-close-rs" class="cfe-cerrar">x</button>
-		</div>
-	</div>
-{% include 'footer.html' %} 
+ {% include 'footer.html' %} 
 	<script>
 		const avisos = document.getElementById('cfe-avisos');
 		let visible = {{ esvisible }};

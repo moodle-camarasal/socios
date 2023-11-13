@@ -56,25 +56,31 @@ def main(request):
   }
   return HttpResponse(template.render(context, request))
 
+@csrf_exempt 
 def testing(request):
-    datos = [
-        {"filial": "San Salvador", "codigo": "00001003", "empresa": "ACERO CENTRO AVILES, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
-        {"filial": "Santa Ana", "codigo": "00019023", "empresa": "ACEROS DE OCCIDENTE, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
-        {"filial": "Santa Ana", "codigo": "00002979", "empresa": "ACODES, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
-        {"filial": "Santa Ana", "codigo": "00003081", "empresa": "ACOMTUS, S.A. DE C.V.", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
-        {"filial": "San Salvador", "codigo": "00015835", "empresa": "ACOSA, S.A DE C.V", "nombre": "", "registrado": "no", "socio": "si", "trabaja": "no"},
-    ]
+  template = loader.get_template('pruebacorreos.html')
+  return HttpResponse(template.render())
+  
+def enviar(request):
+    subject = 'Alta de socio CAMARASAL'
+    message = 'Gracias por registrar tu empresa en CFEVirtual. Si ves este correo es satisfactoriamente'
+    #from_email = 'coordinacion.virtual@camarasal.com'
+    from_email = 'virtual.camarasal@gmail.com'
+    to_email = request.POST['email']
+    try:
+        #html_content = render_to_string('plantillaCorreo.html', {'subject': subject, 'myusuario': myusuario, 'mypass': mypass})
+        #text_content = strip_tags(html_content)
+        #msg = EmailMultiAlternatives(subject, text_content, from_email, [to_emaill])
+        #msg.attach_alternative(html_content, "text/html")
+        #msg.send()
+        send_mail(subject, message, from_email, [to_email])
+    except BadHeaderError:
+        return HttpResponse("Invalido!!!!!, no se encontro la cabecera")
+    #return HttpResponseRedirect(reverse('success'))
+    #return redirect('success', mycorreo=w)
+    url = reverse('success') + f'?mycorreo={to_email}'
+    return HttpResponseRedirect(url)
 
-    # Agrega los datos a la base de datos
-    for dato in datos:
-        MisDatos.objects.create(**dato)
-
-    # Obtén todos los registros
-    registros = MisDatos.objects.all()
-
-    # Renderiza un template con los registros
-    return render(request, 'template.html', {'registros': registros})
-    
 def addrecord(request):
     z = request.POST['cfe-empresa']
     u = request.POST['cfe-codigo']
